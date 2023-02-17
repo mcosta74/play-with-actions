@@ -25,7 +25,8 @@ jobs:
     needs: pre-build
 
     uses: ./.github/workflows/manual.yml
-    with: ${{ matrix.runner }}
+    with:
+      runner: ${{ matrix.runner }}
     
   upload-packages:
     runs-on: ubuntu-latest
