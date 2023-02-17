@@ -15,7 +15,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix: 
-        runner: [ubuntu-latest, windows-latest]
+        runner: [ubuntu-latest, windows-latest, macos-latest]
         
 
     # The type of runner that the job will run on
@@ -25,4 +25,4 @@ jobs:
     steps:
       - name: Build on ${{ matrix.runner }}
         run: |
-          echo "Run on ${{ matrix.runner }}
+          echo "Run on ${{ matrix.runner }}"
