@@ -24,15 +24,9 @@ jobs:
     
     needs: pre-build
 
-    # The type of runner that the job will run on
-    runs-on: ${{ matrix.runner }}
-
-    # Steps represent a sequence of tasks that will be executed as part of the job
-    steps:
-      - name: Build on ${{ matrix.runner }}
-        run: |
-          echo "Run on ${{ matrix.runner }}"
-          
+    uses: ./.github/workflows/manual.yml
+    with: ${{ matrix.runner }}
+    
   upload-packages:
     runs-on: ubuntu-latest
     
