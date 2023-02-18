@@ -29,8 +29,6 @@ jobs:
   test-python:
     runs-on: ${{ inputs.runner }}
     
-    if: ${{ !startsWith(inputs.runner, 'windows') }}
-
     needs:
       - build-3rdparty
       
@@ -61,25 +59,9 @@ jobs:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
 
-    if: ${{ !startsWith(inputs.runner, 'windows') }}
-
     needs:
       - test-javascript
       - test-python
-      - test-cpp
-
-    # Steps represent a sequence of tasks that will be executed as part of the job
-    steps:
-      - run: echo Publishing test results
-
-  test-results-windows:
-    # The type of runner that the job will run on
-    runs-on: ubuntu-latest
-
-    if: ${{ startsWith(inputs.runner, 'windows') }}
-
-    needs:
-      - test-javascript
       - test-cpp
 
     # Steps represent a sequence of tasks that will be executed as part of the job
@@ -90,26 +72,10 @@ jobs:
     # The type of runner that the job will run on
     runs-on: ${{ inputs.runner }}
 
-    if: ${{ !startsWith(inputs.runner, 'windows') }}
-
     needs:
       - test-javascript
       - test-python
-      - build-cpp
-
-    # Steps represent a sequence of tasks that will be executed as part of the job
-    steps:
-      - run: echo Packaging
-
-  packaging-windows:
-    # The type of runner that the job will run on
-    runs-on: ${{ inputs.runner }}
-
-    if: ${{ startsWith(inputs.runner, 'windows') }}
-
-    needs:
-      - test-javascript
-      - build-cpp
+      - test-cpp
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
