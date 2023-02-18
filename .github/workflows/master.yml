@@ -20,7 +20,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix: 
-        runner: [ubuntu-latest, windows-latest, macos-latest]
+        runner: [ubuntu-latest, macos-latest]
     
     needs: pre-build
 
@@ -28,6 +28,11 @@ jobs:
     with:
       runner: ${{ matrix.runner }}
     
+  build-window:    
+    needs: pre-build
+
+    uses: ./.github/workflows/build-windows.yml
+
   upload-packages:
     runs-on: ubuntu-latest
     
