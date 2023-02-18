@@ -28,7 +28,7 @@ jobs:
     with:
       runner: ${{ matrix.runner }}
     
-  build-window:    
+  build-windows:    
     needs: pre-build
 
     uses: ./.github/workflows/build-windows.yml
@@ -38,6 +38,7 @@ jobs:
     
     needs: 
       - build
+      - build-windows
     
     steps:
       - run: echo "upload packages"
