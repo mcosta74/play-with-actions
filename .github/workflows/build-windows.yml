@@ -1,0 +1,66 @@
+# This is a basic workflow to help you get started with Actions
+
+name: Build on Platform
+
+# Controls when the workflow will run
+on:
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_call
+        
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  test-javascript:
+    runs-on: windows-latest
+
+    steps:
+      - run: echo Testing Javascript
+
+  build-3rdparty:
+    runs-on: windows-latest
+    
+    steps:
+      - run: echo Build 3rdparty
+
+  build-cpp:
+    # The type of runner that the job will run on
+    runs-on: windows-latest
+
+    needs:
+      - build-3rdparty
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      - run: echo Build
+
+  test-cpp:
+    runs-on: windows-latest
+
+    needs:
+      - build-cpp
+      
+    steps:
+      - run: echo Testing Python
+
+  test-results:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    needs:
+      - test-javascript
+      - test-cpp
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      - run: echo Publishing test results
+
+  packaging:
+    # The type of runner that the job will run on
+    runs-on: windows-latest
+
+    needs:
+      - test-javascript
+      - test-cpp
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      - run: echo Packaging
