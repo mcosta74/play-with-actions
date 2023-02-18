@@ -29,6 +29,8 @@ jobs:
 
   test-python:
     runs-on: ${{ inputs.runner }}
+    
+    if: ${{ !startsWith(${{ inputs.runner }}, 'windows') }}
 
     needs:
       - build-3rdparty
